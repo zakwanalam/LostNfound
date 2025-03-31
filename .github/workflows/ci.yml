@@ -1,0 +1,24 @@
+name: Auto Create PR on Branch Push
+
+on:
+  push:
+    # Trigger on push events for any branch except main
+    branches-ignore:
+      - main
+
+jobs:
+  create-pull-request:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: main
+          branch: ${{ github.ref_name }}
+          title: "Auto PR: Merge changes from ${{ github.ref_name }} into main"
+          body: "This pull request was automatically created by GitHub Actions."
