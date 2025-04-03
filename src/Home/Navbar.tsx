@@ -15,6 +15,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import { NavbarProps,MenuItem } from "./types/navbar-types";
 import {
   Sheet,
   SheetContent,
@@ -22,41 +23,13 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-
-interface MenuItem {
-  title: string;
-  url: string;
-  description?: string;
-  icon?: React.ReactNode;
-  items?: MenuItem[];
-}
-
-interface Navbar1Props {
-  logo?: {
-    url: string;
-    src: string;
-    alt: string;
-    title: string;
-  };
-  menu?: MenuItem[];
-  auth?: {
-    login: {
-      title: string;
-      url: string;
-    };
-    signup: {
-      title: string;
-      url: string;
-    };
-  };
-}
-
+import logoSvg from "../assets/logo2.png"
 const Navbar = ({
   logo = {
-    url: "https://www.shadcnblocks.com",
-    src: "https://shadcnblocks.com/images/block/logos/shadcnblockscom-icon.svg",
+    url: "#",
+    src: logoSvg,
     alt: "logo",
-    title: "Shadcnblocks.com",
+    title: "LostNFound",
   },
   menu = [
     { title: "Home", url: "#" },
@@ -89,9 +62,11 @@ const Navbar = ({
     login: { title: "Login", url: "#" },
     signup: { title: "Sign up", url: "#" },
   },
-}: Navbar1Props) => {
+}: NavbarProps) => {
+
   return (
-    <section className="py-4 ">
+    
+    <section className={"py-4"}>
       <div className="container">
         {/* Desktop Menu */}
         <nav className="hidden justify-between lg:flex">
@@ -103,9 +78,9 @@ const Navbar = ({
                 {logo.title}
               </span>
             </a>
-            <div className="flex items-center">
+            <div >
               <NavigationMenu >
-                <NavigationMenuList>
+                <NavigationMenuList className="flex gap-2">
                   {menu.map((item) => renderMenuItem(item))}
                 </NavigationMenuList>
               </NavigationMenu>
@@ -127,6 +102,9 @@ const Navbar = ({
             {/* Logo */}
             <a href={logo.url} className="flex items-center gap-2">
               <img src={logo.src} className="max-h-8" alt={logo.alt} />
+              <span className="text-lg font-semibold tracking-tighter">
+                {logo.title}
+              </span>
             </a>
             <Sheet>
               <SheetTrigger asChild>
@@ -189,7 +167,7 @@ const renderMenuItem = (item: MenuItem) => {
     <NavigationMenuItem key={item.title}>
       <NavigationMenuLink
         href={item.url}
-        className="group inline-flex h-10 flex-row items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-accent-foreground"
+        className="group inline-flex h-9 flex-row items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-accent-foreground"
       >
         <div className="text-foreground">{item.icon}</div>
         {item.title}

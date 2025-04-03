@@ -1,15 +1,17 @@
 import React from 'react'
 import Navbar from './Navbar'
+import NavbarContainer from './NavbarContainer'
 
 function Home() {
   return (
-   <>
-     <div className='flex relative items-center justify-center'>
-      <div className='fixed top-0 w-4/5 max-w-screen-xl mx-auto '>
-        <Navbar/>
+    <>
+      <div className='flex relative items-center justify-center'>
+        {/* Navbar Container */}
+        <NavbarContainer color='bg-gray-200'>
+          <Navbar />
+        </NavbarContainer>
       </div>
-     </div>
-   </>
+    </>
   )
 }
 
