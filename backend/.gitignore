@@ -1,0 +1,54 @@
+# Build folders
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+
+# Visual Studio files
+.vs/
+.vscode/
+
+# ASP.NET publish profiles
+Properties/PublishProfiles/
+
+# Logs
+*.log
+Logs/
+logs/
+
+# Dotnet environment files
+*.db
+*.db-shm
+*.db-wal
+*.pdb
+
+# .NET secrets (if using `dotnet user-secrets`)
+secrets.json
+
+# Local test results
+TestResults/
+*.trx
+
+# Coverage reports
+coverage/
+*.coverage
+*.lcov
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Environment config
+.env
+.env.*
+
+# Rider / JetBrains
+.idea/
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/
