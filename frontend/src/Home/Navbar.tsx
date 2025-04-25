@@ -26,13 +26,13 @@ import {
 import logoSvg from "../assets/logo2.png"
 const Navbar = ({
   logo = {
-    url: "#",
+    url: "/",
     src: logoSvg,
     alt: "logo",
     title: "LostNFound",
   },
   menu = [
-    { title: "Home", url: "#" },
+    { title: "Home", url: "/" },
     {
       title: "Report",
       url: "#",
@@ -59,8 +59,8 @@ const Navbar = ({
     },
   ],
   auth = {
-    login: { title: "Login", url: "#" },
-    signup: { title: "Sign up", url: "#" },
+    login: { title: "Login", url: "/login" },
+    signup: { title: "Sign up", url: "/sign-up" },
   },
 }: NavbarProps) => {
 
