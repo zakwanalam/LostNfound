@@ -76,7 +76,7 @@ const foundItems = [
     }
 ];
 
-export default function LostItemsDashboard() {
+export default function HeroSection() {
     return (
 
         <div className='flex  items-center justify-center'>
@@ -87,7 +87,6 @@ export default function LostItemsDashboard() {
           <Button>Post Item</Button>
         </div>
       </header> */}
-
             <div className="space-y-8 px-6 lg:px-0 w-screen">
                 <section className="relative flex   rounded-xl overflow-hidden shadow-md">
                     <img
