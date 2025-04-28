@@ -1,0 +1,15 @@
+# Add NuGet packages
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer
+dotnet add package BCrypt.Net-Next
+dotnet add package System.IdentityModel.Tokens.Jwt
+
+# Install EF Core tools (if not already installed)
+dotnet tool install --global dotnet-ef
+
+# Update EF Core tools
+dotnet tool update --global dotnet-ef
+
+# From the React project root (not .NET)
+# Install axios for API calls
+npm install axios

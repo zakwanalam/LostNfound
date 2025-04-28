@@ -12,11 +12,57 @@ import { Label } from "@/components/ui/label"
 import PhoneSelect from "./ui/phone-select"
 import NavbarContainer from "@/Home/NavbarContainer"
 import Navbar from "@/Home/Navbar"
+import { useState } from "react"
+import { useRouter } from "next/router"
+import axios from "axios"
 
 export function SignupForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    countryCode: '+1', // Default value
+    phoneNumber: ''
+  })
+  const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter()
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsLoading(true)
+    
+    try {
+      const response = await axios.post("http://localhost:5000/api/auth/register", {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        password: formData.password,
+        countryCode: formData.countryCode,
+        phoneNumber: formData.phoneNumber
+      })
+      
+      // Redirect to login after successful signup
+      router.push("/login")
+      alert("Signup successful! Please login.")
+    } catch (error) {
+      alert(error.response?.data?.message || "Signup failed")
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handlePhoneChange = (phoneData: { phoneNumber: string, countryCode: string }) => {
+    setFormData({
+      ...formData,
+      phoneNumber: phoneData.phoneNumber,
+      countryCode: phoneData.countryCode
+    })
+  }
+
   return (
     <>
       <NavbarContainer>
@@ -32,7 +78,7 @@ export function SignupForm({
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="grid gap-6">
                   <div className="flex flex-col gap-4">
                     <Button variant="outline" className="w-full cursor-pointer">
@@ -65,27 +111,34 @@ export function SignupForm({
                         <Label htmlFor="firstName">First Name</Label>
                         <Input
                           id="firstName"
-                          type="firstName"
+                          type="text"
                           placeholder="John"
                           required
+                          value={formData.firstName}
+                          onChange={(e) => setFormData({...formData, firstName: e.target.value})}
+                          disabled={isLoading}
                         />
                       </div>
                       <div className="grid gap-3">
                         <Label htmlFor="lastName">Last Name</Label>
                         <Input
                           id="lastName"
-                          type="lastName"
+                          type="text"
                           placeholder="Doe"
                           required
+                          value={formData.lastName}
+                          onChange={(e) => setFormData({...formData, lastName: e.target.value})}
+                          disabled={isLoading}
                         />
                       </div>
                     </div>
                     <div className="grid gap-3">
                       <Label htmlFor="phoneNumber">Phone Number</Label>
-      
-                      <PhoneSelect />
+                      <PhoneSelect 
+                        onPhoneChange={handlePhoneChange}
+                        disabled={isLoading}
+                      />
                     </div>
-      
                     <div className="grid gap-3">
                       <Label htmlFor="email">Email</Label>
                       <Input
@@ -93,15 +146,28 @@ export function SignupForm({
                         type="email"
                         placeholder="m@example.com"
                         required
+                        value={formData.email}
+                        onChange={(e) => setFormData({...formData, email: e.target.value})}
+                        disabled={isLoading}
                       />
                     </div>
                     <div className="grid gap-3">
                       <Label htmlFor="password">Password</Label>
-      
-                      <Input id="password" type="password" required />
+                      <Input 
+                        id="password" 
+                        type="password" 
+                        required
+                        value={formData.password}
+                        onChange={(e) => setFormData({...formData, password: e.target.value})}
+                        disabled={isLoading}
+                      />
                     </div>
-                    <Button type="submit" className="w-full">
-                      Signup
+                    <Button 
+                      type="submit" 
+                      className="w-full"
+                      disabled={isLoading}
+                    >
+                      {isLoading ? "Creating account..." : "Signup"}
                     </Button>
                   </div>
                   <div className="text-center text-sm">
@@ -116,7 +182,6 @@ export function SignupForm({
           </Card>
         </div>
       </div>
-    </>
     <div className="bg-[url('/lost_found.jpg')] bg-no-repeat w-full min-h-screen flex justify-center items-center">
     <div className={cn("max-w-sm sm:max-w-md opacity-85", className)} {...props}>
       <Card>
@@ -155,34 +220,30 @@ export function SignupForm({
                 </span>
               </div>
               <div className="grid gap-6">
-                
-              
                 <div className="flex gap-2">
-                <div className="grid gap-3">
-                <Label htmlFor="firstName">First Name</Label>
-                  <Input
-                    id="firstName"
-                    type="firstName"
-                    placeholder="John"
-                    required
-                  />
-                </div>
-                <div className="grid gap-3">
-                  <Label htmlFor="lastName">Last Name</Label>
-                  <Input
-                    id="lastName"
-                    type="lastName"
-                    placeholder="Doe"
-                    required
-                  />
-                </div>
+                  <div className="grid gap-3">
+                    <Label htmlFor="firstName">First Name</Label>
+                    <Input
+                      id="firstName"
+                      type="text"
+                      placeholder="John"
+                      required
+                    />
+                  </div>
+                  <div className="grid gap-3">
+                    <Label htmlFor="lastName">Last Name</Label>
+                    <Input
+                      id="lastName"
+                      type="text"
+                      placeholder="Doe"
+                      required
+                    />
+                  </div>
                 </div>
                 <div className="grid gap-3">
                   <Label htmlFor="phoneNumber">Phone Number</Label>
-              
-                    <PhoneSelect />
+                  <PhoneSelect />
                 </div>
-                  
                 <div className="grid gap-3">
                   <Label htmlFor="email">Email</Label>
                   <Input
@@ -193,8 +254,7 @@ export function SignupForm({
                   />
                 </div>
                 <div className="grid gap-3">
-                    <Label htmlFor="password">Password</Label>
-                    
+                  <Label htmlFor="password">Password</Label>
                   <Input id="password" type="password" required />
                 </div>
                 <Button type="submit" className="w-full">
@@ -213,5 +273,6 @@ export function SignupForm({
       </Card>
     </div>
     </div>
+    </>
   )
 }

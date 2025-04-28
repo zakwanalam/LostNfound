@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace _.Models;
+namespace LostnFound.Models;
 
 public partial class DBproductsContext : DbContext
 {
