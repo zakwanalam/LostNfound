@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .container {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: auto;
+    }
+    .item-image {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      border-radius: 8px;
+    }
+    .details {
+      margin-top: 20px;
+    }
+    .label {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Item Claim Request</h2>
+
+    <div class="details">
+      <p><span class="label">Item ID:</span> {{ITEM_ID}}</p>
+      <p><span class="label">Item Name:</span> {{ITEM_NAME}}</p>
+    </div>
+
+    <div class="details">
+      <img src="{{ITEM_IMAGE_URL}}" alt="Item Image" class="item-image" />
+    </div>
+
+    <div class="details">
+      <p><span class="label">Claimed By:</span> {{CLAIMER_NAME}} ({{CLAIMER_EMAIL}})  </p>
+       <p><span class="label">Contact:</span> {{CLAIMER_PHONE}}  </p>
+    </div>
+
+    <p>The above user has requested to claim your posted item. Please verify and contact the user accordingly.</p>
+
+    <p>Thank you,<br />Lost & Found Team</p>
+  </div>
+</body>
+</html>

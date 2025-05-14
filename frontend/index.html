@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lost&Found App</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+  <script async defer crossOrigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"
+    onLoad="initializeFacebookSDK()"></script>
+  <script>
+    // Initialize the Facebook SDK
+    function initializeFacebookSDK() {
+      window.FB.init({
+        appId: '1789147075342100', // Replace with your Facebook App ID
+        cookie: true,
+        xfbml: true,
+        version: 'v12.0' // Use the latest Facebook Graph API version
+      });
+    }
+  </script>
+</body>
+
+</html>
